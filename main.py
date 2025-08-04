@@ -1,5 +1,9 @@
 import helper
+helper.pd.set_option("display.max_columns", None)
+helper.pd.set_option("display.max_colwidth", None)
+
 def menu():
+    df = helper.pd.DataFrame()
     while True:
         print('Type help to get all available comands')
         inp = input('>>')
@@ -10,7 +14,17 @@ def menu():
                   """)
         if inp == 'ld':
             df = helper.loadData()
-            print("Dataframe size:", df.shape)
+        if inp == 'gs':
+            if df.empty:
+                uags = input("Dataset didn't load, would you like load datase (Y/n)")
+                if  (not uags) or (uags.upper()=='Y'):
+                    df = helper.loadData()
+                else:
+                    print('Please load dataset use comand ld')
+                    continue
+            print(df.head())
+            
+
 
         if inp.upper() == 'Q':
             break
