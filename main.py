@@ -1,4 +1,6 @@
 import helper
+import CustomsChart
+import GeneralChart
 helper.pd.set_option("display.max_columns", None)
 helper.pd.set_option("display.max_colwidth", None)
 
@@ -25,6 +27,11 @@ def menu():
                     print('Please load dataset use comand ld')
                     continue
             print(df.sample(10))
+        if inp == 3:
+            GeneralChart.gencharts()
+        if inp == 4:
+            CustomsChart.customcharts()
+
             
 
 

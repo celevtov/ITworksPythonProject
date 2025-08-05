@@ -1,0 +1,2 @@
+def gencharts():
+    print('privet')

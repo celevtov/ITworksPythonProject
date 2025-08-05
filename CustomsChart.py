@@ -1,0 +1,2 @@
+def customcharts():
+    print('privet')
