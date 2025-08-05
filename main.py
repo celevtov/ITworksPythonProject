@@ -9,12 +9,14 @@ def menu():
         inp = input('>>')
         if inp.upper() == 'HELP':
             print("""
-                    ld - load data and inizializate all metrics
-                    gs - get sample of data
+                    1 - load data and inizializate all metrics
+                    2 - get sample of data
+                    3 - show general charts
+                    4 - make custom charts  
                   """)
-        if inp == 'ld':
+        if inp == 1:
             df = helper.loadData()
-        if inp == 'gs':
+        if inp == 2:
             if df.empty:
                 uags = input("Dataset didn't load, would you like load datase (Y/n)")
                 if  (not uags) or (uags.upper()=='Y'):
@@ -22,7 +24,7 @@ def menu():
                 else:
                     print('Please load dataset use comand ld')
                     continue
-            print(df.head())
+            print(df.sample(10))
             
 
 
