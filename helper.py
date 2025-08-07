@@ -75,5 +75,6 @@ def loadData():
     df['RealSales'] = df['Sales']/(1-df['DiscountPrcnt'])
     df['DiscountAbs'] = df['RealSales']  -  df['Sales']
     df['ShipingSpeed'] = (df['Ship_Date']-df['Order_Date']).dt.days
+    df['Order_Month']=df['Order_Date'].dt.to_period('M').dt.start_time
     print("Dataframe size:", df.shape)
     return df
