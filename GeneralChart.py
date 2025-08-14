@@ -6,6 +6,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sb
+import scipy.stats as stats
 
 def getMonthDates(whole_month=1, onlystart=0, date_name='start date'):
     start_dt = end_dt = pd.NaT
@@ -204,6 +205,51 @@ def activecustomers(sales_df_proc):
     #print(sales_cust_sleep.loc[(sales_cust_sleep['no_order_days']>n_days_sleep)&(sales_cust_sleep['Segment']==sc_segment)])
 
 
+def segmentshipmode(sales_df_proc):
+    contingency_table = pd.crosstab(sales_df_proc['Segment'], sales_df_proc['Ship_Mode'])
+    print(contingency_table)
+
+    num_rows, num_columns = contingency_table.shape
+    plot_cols=3
+    plot_rows=max((num_rows-1)//plot_cols+1, 1)
+    col_names=list(contingency_table.columns)
+    row_indices = list(contingency_table.index)
+    #print(f'num_rows={num_rows} plot_rows={plot_rows} plot_cols={plot_cols}')
+    fig, axs = plt.subplots(nrows=plot_rows, ncols=plot_cols, figsize=(4*plot_cols, 4*plot_rows+1))
+
+    for i in range(num_rows):
+        if plot_rows==1:
+            ax=axs[i%plot_cols]
+        else:
+            ax=axs[i//plot_cols][i%plot_cols]
+        ax.pie(contingency_table.iloc[i], labels=col_names) #, colors=colors, autopct='%1.1f%%', startangle=90)
+        ax.axis('equal') # Equal aspect ratio ensures that pie is drawn as a circle.
+        ax.set_title(row_indices[i])
+
+    fig.suptitle("The share of each Ship Mode in the total number of orders by client Segment")
+    #plt.tight_layout(rect=[0, 0.03, 1, 0.95]) # Adjust layout to accommodate suptitle
+    plt.show()
+
+    print('''==============================
+Let's check: is there an association between client Segment and Ship Mode?
+    * The null hypothesis (H0): client Segment and Ship Mode are independent variables (there is NO association).
+    * An alternative hypothesis (H1): There is an association between client Segment and Ship Mode.
+
+Let's perform Chi-Square Test ''')
+
+    chi2_stat, p_value, dof, expected = stats.chi2_contingency(contingency_table)
+    print(f"chi2_stat: {chi2_stat:.4f}")
+    print(f"p_value: {p_value}")
+    #print(expected)
+
+    alpha = 0.05
+    if p_value < alpha:
+        print("The null hypothesis is REJECTED.")
+        print(f"There is a statistically significant association between client Segment and Ship Mode") #: chi2_stat={chi2_stat:.4f}, p_value={p_value}")
+    else:
+        print("There is NO statistically significant association between client Segment and Ship Mode: CANNOT reject the null hypothesis")
+
+    
 def dashboard(sales_df_proc):
     print('Here will be a Big Beautiful Dashboard')
 
@@ -217,8 +263,9 @@ def gencharts(sales_df_proc):
                     1 - show monthly Sales and Profit/Margin % by period  
                     2 - show Top and Bottom Sales product categories  
                     3 - show Average monthly Bill
-                    4 - show Shipping monthly statistics 
-                    5 - show Sleeping customers statistics on date
+                    4 - show relations between client Segment and Ship Mode (+stat test)
+                    5 - show Shipping monthly statistics 
+                    6 - show Sleeping customers statistics on date
                     Q - return to Main menu  
                   """)
         inp = input('>>')
@@ -229,8 +276,10 @@ def gencharts(sales_df_proc):
         elif inp =='3':
             avgmonthlysales(sales_df_proc)
         elif inp =='4':
-            shippingstats(sales_df_proc)
+            segmentshipmode(sales_df_proc)
         elif inp =='5':
+            shippingstats(sales_df_proc)
+        elif inp =='6':
             activecustomers(sales_df_proc)
         elif inp.upper() =='Q':
             break
