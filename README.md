@@ -7,13 +7,13 @@ For work with tools ypu need to install some pakages, use this code
 pip install -r [requirements.txt]
 ```
 ## How to use
-For starting you should use main.py
+To start you should use main.py
 ```
 python3 main.py
 ```
-On the next step ypu get 4 actions
+On the next step you have 4 actions
 ### 1 - get sample of data
-You could get sample from dataframe to undastnd data and column
+You could get sample from dataframe to understand data and columns
 <details>
   <summary>Table Example</summary>
 
@@ -25,13 +25,32 @@ You could get sample from dataframe to undastnd data and column
 </details>
 
 ### 2 - show general charts
-тут над дописать про твои чарты
+This mode is used to display several pre-defined charts with key Sales metrics.
+
+You can choose one of the following metrics:
+1 - a linear graph with Sales and Profit to see them together and compare
+
+three options to track different sales metrics and plan some marketing campaigns:
+2 - two bar charts with Top-5 and Bottom-5 product categories
+3 - bar charts of average sum of order by months
+4 - relations between client segment and ship mode, with pie charts and stat chi-square test
+
+two bar charts to track company SLAs:
+5 - shipping time (to check shipping department efficiency)
+6 - active customers
+
+Some plots also have additional table data for better understanding
+#### How to display a chart
+- choose action 2 - make general charts
+- on the next step input 1 or two dates for which you want to display data. Some charts will be built just for whole months, while others - for a random periods or on date
+- get your chart!
+
 ### 3 - make custom charts
-This tools where you can make 3 charts used all available metrics and dimension
-First you have to choose type of chart
-- Line - simple line chart, you can combine several metrics and only one dimension, usualy use to build chart by date.
-- Bar Chart - Help match same categoryes, you can choose several metrics (but my advice use only one )
-- Scatter plot - this chart offten use for correlation, chose TWO metrics for x and y and one optional metric for color 
+This is the tool where you can make 3 charts using all available metrics and dimensions
+First you need to choose the type of chart
+- Line - simple line chart, you can combine several metrics and only one dimension, usualy used to build chart by date.
+- Bar Chart - Help match same categories, you can choose several metrics (but my advice use only one )
+- Scatter plot - this chart is often used for correlation, choose TWO metrics for x and y and one optional metric for color 
 #### How to build line and bar charts
  - choose action 3 - make custom charts
  - On the next step input line or bar

@@ -260,12 +260,12 @@ def gencharts(sales_df_proc):
     while True:
         print('Choose your option:')
         print("""
-                    1 - show monthly Sales and Profit/Margin % by period  
+                    1 - show monthly Sales and Profit by period  
                     2 - show Top and Bottom Sales product categories  
                     3 - show Average monthly Bill
                     4 - show relations between client Segment and Ship Mode (+stat test)
                     5 - show Shipping monthly statistics 
-                    6 - show Sleeping customers statistics on date
+                    6 - show Active customers statistics on date
                     Q - return to Main menu  
                   """)
         inp = input('>>')
