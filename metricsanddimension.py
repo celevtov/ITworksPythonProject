@@ -27,9 +27,9 @@ def getListOfMetrics():
             ,
         {'name':'Discount%'
         ,'description':'Percent of Discount'
-        ,'column':['RealSales','Discount']
+        ,'column':['RealSales','DiscountAbs']
         ,'func':['sum','sum']
-        ,'formula':"dfagg['Discount']/dfagg['RealSales']"
+        ,'formula':"dfagg['DiscountAbs']/dfagg['RealSales']"
         }
     ]
     return Metrics
