@@ -14,7 +14,8 @@ def menu():
         print("""
                     1 - get sample of data
                     2 - show general charts
-                    3 - make custom charts  
+                    3 - make custom charts
+                    4 - Save Data set in csv file  
                     q - for exit
               
                   """)
@@ -32,6 +33,13 @@ def menu():
             GeneralChart.gencharts(df)
         elif inp == '3':
             CustomsChart.customcharts(df)
+        elif inp == '4':
+            print('Type dir and file name to save (e.g. ~/Documents/filename.csv)')
+            inp = input('>>')
+            try:
+                helper.saveDF(df,inp)
+            except OSError as er:
+                print(f'ERROR!!!! {er}')
         elif inp.upper() == 'Q':
             break
         else:

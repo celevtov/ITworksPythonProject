@@ -78,3 +78,7 @@ def loadData():
     df['Order_Month']=df['Order_Date'].dt.to_period('M').dt.start_time
     print("Dataframe size:", df.shape)
     return df
+
+def saveDF(df :pd.DataFrame,path):
+        df.to_csv(path)
+    

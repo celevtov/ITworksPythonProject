@@ -6,6 +6,19 @@ def getListOfMetrics():
         ,'func':['sum']
         }
         ,
+        {'name':'Quantity'
+        ,'description':'Product Quantity'
+        ,'column':['Quantity']
+        ,'func':['sum']
+        }
+        ,
+        {'name':'Avg Price'
+        ,'description':'Average product price'
+        ,'column':['Sales','Quantity']
+        ,'func':['sum','sum']
+        ,'formula':"dfagg['Sales']/dfagg['Quantity']"
+        }
+        ,
         {'name':'Profit'
         ,'description':'Volume of Profit'
         ,'column':['Profit']
@@ -40,21 +53,42 @@ def getListOfDimension():
             ,'field':'Order_Date'
         }
         ,
+        {  'name':'Order Month'
+            ,'description':'Create order date, month when order was created'
+            ,'field':'Order_Month'
+        }
+        ,
         {  'name':'Ship Mode'
             ,'description':'Shipe mode, which was used for order'
             ,'field': 'Ship_Mode'
                 
         }
         ,
-        {  'name':'Ship Date'
-            ,'description':'When order was delivered'
-            ,'field':'Ship_Date'
+        {  'name':'Shiping Speed'
+            ,'description':'How long days order was delivering'
+            ,'field':'ShipingSpeed'
         }
         ,
         {  'name':'Region'
             ,'description':'From wich region was order'
             ,'field':'Region'
         }
+        ,
+        {  'name':'State'
+            ,'description':'From wich state was order'
+            ,'field':'State'
+        }
+        ,
+        {  'name':'Segment'
+            ,'description':'From wich Segment was order'
+            ,'field':'Segment'
+        }
+         ,
+        {  'name':'Category'
+            ,'description':'From wich Category was product in order'
+            ,'field':'Category'
+        }
+
     ]
     return dimension
 
